@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="~/Images/favicon.ico">
+	<title>@ViewData["Title"]</title>
+	<!-- Bootstrap core CSS -->
+	<link href="~/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Fonts -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+	<!-- Custom styles for this template -->
+    <link href="~/css/mediumish.css" type="text/css" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+		<!-- Begin Nav
+		================================================== -->
+		<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="container">
+				<!-- Begin Logo -->
+				<a class="navbar-brand" asp-action="Index" asp-controller="Home">
+					<img src="~/Images/logo.png" alt="logo">
+				</a>
+				<!-- End Logo -->
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<!-- Begin Menu -->
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active">
+							<a class="nav-link" asp-action="Index" asp-controller="Home">Stories <span class="sr-only">(current)</span></a>
+						</li>
+						@if (User.Identity.IsAuthenticated)
+						{
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" asp-action="ViewAuthor" asp-controller="Users" asp-route-id=1 id="postDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Author
+							</a>
+							<div class="dropdown-menu" aria-labelledby="postDropdown">
+								<!-- Dropdown items go here -->
+								<a class="dropdown-item" asp-action="CreatePost" asp-controller="Posts">Create Post</a>
+									<a class="dropdown-item" asp-action="CreateTag" asp-controller="Tags">Create Tag</a>
+									<a class="dropdown-item" asp-action="ViewAuthor" asp-controller="Users" asp-route-id=1>View profile</a>
+									<a class="dropdown-item" asp-action="EditUser" asp-controller="Users" asp-route-id=1>Edit profile</a>
+									<a class="dropdown-item" asp-action="AdminBoard" asp-controller="Users" asp-route-id=1>AdminBoard</a>
+								<a class="dropdown-item" asp-action="SignOut" asp-controller="Users">SignOut</a>
+								<!-- Add more dropdown items as needed -->
+							</div>
+							</li>
+						}else
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-action="SignIn" asp-controller="Users" >SignIn</a>
+							</li>
+						}
+					</ul>
+					<!-- End Menu -->
+					<!-- Begin Search -->
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="text" placeholder="Search">
+						<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
+					</form>
+					<!-- End Search -->
+				</div>
+			</div>
+		</nav>
+		<!-- End Nav
+		================================================== -->
+		<!-- Begin Site Title
+		================================================== -->
+		@RenderSection("QuickBrief",false)
+		<!-- End Site Title
+		================================================== -->
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+	<div class="footer">
+		<div class="container sociallinks">
+			<div class="row justify-content-center">
+				<div class="sociallinks">
+					<a href="#"><i class="fa-brands fa-square-facebook fa-2xl" ></i></a>
+					<a href="#"><i class="fa-brands fa-linkedin fa-2xl" ></i></a>
+					<a href="#"><i class="fa-brands fa-square-x-twitter fa-2xl" ></i></a>
+				</div>
+			</div>
+		</div><br />
+		<p class="pull-left">
+			Copyright &copy; 2023 MomentDev
+		</p>
+		<p class="pull-right">
+			MomentDev by <a target="_blank" asp-action="ViewAuthor" asp-controller="Users" asp-route-id=1>Abdullah Hakim</a>
+		</p>
+		<div class="clearfix">
+		</div>
+	</div>
+	<script src="~/js/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="~/js/bootstrap.min.js"></script>
+	<script src="~/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="https://kit.fontawesome.com/430c8ecba2.js" crossorigin="anonymous"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

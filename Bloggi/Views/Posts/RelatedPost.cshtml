@@ -1,0 +1,123 @@
+﻿@using Bloggi.ViewModels;
+@model List<RelatedPostViewModel>
+@{
+    ViewData["Title"] = "Related posts";
+}
+
+<!-- Begin List of Tags -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tags-container">
+                <div class="horizontal-scroll">
+                    <button class="scroll-button left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div>
+                        <ul class="tags">
+                            @foreach (var tag in ViewBag.PostTags)
+                                {
+                                    <li><a asp-action="ViewTag" asp-controller="Tags" asp-route-id=@tag.Id>@tag.Name</a></li>
+                                }
+                        </ul>
+                    </div>
+                    <button class="scroll-button right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End List of Tags -->
+<section class="recent-posts">
+    <div class="section-title">
+        <h2><span>Related stories</span></h2>
+    </div>
+    <div class="card-columns listrecent">
+        @foreach (var post in @Model)
+        {
+            <!-- begin post -->
+            <div class="card">
+                <a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.Id">
+                    <img class="img-fluid" src="@post.ImageUrl" alt="@post.Title">
+                </a>
+                <div class="card-block">
+                    <h2 class="card-title"><a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.Id">@post.Title</a></h2>
+                    <h4 class="card-text">@post.Brief</h4>
+                    <div class="metafooter">
+                        <div class="wrapfooter">
+                            <span class="author-meta">
+                                <span class="post-read"> @post.ReadingTime min read</span>
+                                <span class="dot"></span>
+                                <span class="post-date">@post.CreatedOn.ToString("yyyy/MM/dd")</span>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="tagcontainer">
+                        <div class="icon-container">
+                            <a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@post.Id>
+                                <i class="fa-solid fa-angles-right fa-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+</section>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const scrollContainer = $('.horizontal-scroll');
+            const scrollList = $('.tags');
+            const scrollButtonLeft = $('.scroll-button.left');
+            const scrollButtonRight = $('.scroll-button.right');
+
+            let scrollPosition = 0;
+
+            // Check if the tags overflow to the right
+            if (scrollList.width() > scrollContainer.width()) {
+                scrollButtonRight.css('visibility', 'visible'); // Show right button
+            } else {
+                scrollButtonRight.css('visibility', 'hidden'); // Hide right button
+            }
+
+            // Scroll to the right
+            scrollButtonRight.click(function () {
+                scrollPosition += 100; // Adjust this value for scrolling distance
+                if (scrollPosition > scrollList.width() - scrollContainer.width()) {
+                    scrollPosition = scrollList.width() - scrollContainer.width();
+                }
+                scrollButtonLeft.css('visibility', 'visible'); // Show left button
+
+                if (scrollPosition >= scrollList.width() - scrollContainer.width()) {
+                    scrollButtonRight.css('visibility', 'hidden'); // Hide right button when at the end
+                }
+
+                scrollList.css('transform', `translateX(-${scrollPosition}px)`);
+            });
+
+            // Scroll to the left
+            scrollButtonLeft.click(function () {
+                scrollPosition -= 100; // Adjust this value for scrolling distance
+                if (scrollPosition < 0) {
+                    scrollPosition = 0;
+                }
+                scrollButtonRight.css('visibility', 'visible'); // Show right button
+
+                if (scrollPosition === 0) {
+                    scrollButtonLeft.css('visibility', 'hidden'); // Hide left button when at the beginning
+                }
+
+                scrollList.css('transform', `translateX(-${scrollPosition}px)`);
+            });
+        });
+    </script>
+
+}

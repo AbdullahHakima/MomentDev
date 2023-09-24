@@ -1,0 +1,94 @@
+﻿@{
+	ViewData["Title"] = $"{Model.FirstName} {Model.LastName}";
+}
+@using Bloggi.ViewModels;
+@model UserViewModel
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="user-details">
+                <div class="row">
+                    <div class="col-md-2 col-12">
+                        <img class="img-fluid" src="@Model.ProfileImageUrl" alt="@Model.FirstName">
+                    </div>
+                    <div class="col-md-10 col-12">
+                        <h1>@Model.FirstName @Model.LastName</h1>
+                        <p>@Html.Raw(Model.Brief)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 sociallinks">
+                        <a target="_blank" href="https://twitter.com/Abdullahhakimam"><i class="fab fa-linkedin fa-2x"></i></a>
+                        <a target="_blank" href="https://twitter.com/Abdullahhakimam"><i class="fab fa-facebook-square fa-2x"></i></a>
+                        <a target="_blank" href="https://twitter.com/Abdullahhakimam"><i class="fab fa-github fa-2x"></i></a>
+                        <a target="_blank" href="https://twitter.com/Abdullahhakimam"><i class="fab fa-twitter-square fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Begin Author Posts
+================================================== -->
+@foreach(var userPosts in Model.UserPostsVM)
+{
+    <div class="blog-post-card">
+        <div class="card-body">
+            <h2 class="card-title"><a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@userPosts.Id">@userPosts.Title</a></h2>
+            <p class="card-text">@userPosts.Brief</p>
+            <div class="metafooter">
+                <div class="author-meta">
+                    <span class="post-read">@userPosts.ReadingTime min read</span>
+                    <span class="dot">·</span>
+                    <span class="post-date">@userPosts.CreatedOn.ToString("yyyy/MM/dd")</span>
+                </div>
+            </div>
+            <div class="tag-container">
+                <ul class="tags">
+                    @foreach (var tag in userPosts.Tags)
+                    {
+                        <li><a asp-action="ViewTag" asp-controller="Tags" asp-route-id=@tag.Id>@tag.Name</a></li>
+                    }
+                </ul>
+                <div class="icon-container">
+                    <a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@userPosts.Id>
+                        <i class="fa-solid fa-angles-right fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<!-- End Author Posts
+================================================== -->
+<nav aria-label="Page navigation">
+    <ul class="custom-pagination">
+
+        @if (ViewBag.Index > 1)
+        {
+            <li>
+                <a asp-action="ViewAuthor" asp-controller="Users" asp-route-pageIndex=1>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a asp-action="ViewAuthor" asp-controller="Users" asp-route-pageIndex=@(ViewBag.Index - 1)>
+                    Previous
+                </a>
+            </li>
+        }
+
+        @if (ViewBag.Index < ViewBag.NumberOfPages)
+        {
+            <li>
+                <a asp-action="ViewAuthor" asp-controller="Users" asp-route-pageIndex=@(ViewBag.Index + 1)>
+                    Next
+                </a>
+            </li>
+        }
+
+    </ul>
+</nav>

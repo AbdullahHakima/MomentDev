@@ -1,0 +1,35 @@
+﻿@using Bloggi.ViewModels;
+@model CreateTagViewModel
+@{
+    ViewData["Title"] = "Create new tag";
+}
+<div class="container">
+    <h1>Create a tag</h1>
+    <form asp-action="CreateTag" asp-controller="Tags" method="post">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" id="content" rows="4"></textarea>
+        </div>
+        <input type="submit" value="Create Tag" class="btn btn-primary">
+    </form>
+</div>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/4p0i1zi0tdlanot1fb2rxzl8q1yvr1w4ia4u8wbvygxjpjru/tinymce/5/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#content', // Replace with the ID of your textarea
+            plugins: 'autolink lists link image',
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+            menubar: false,
+            statusbar: false,
+            apiKey: '4p0i1zi0tdlanot1fb2rxzl8q1yvr1w4ia4u8wbvygxjpjru' // Replace with your TinyMCE API key
+        });
+    </script>
+
+}

@@ -1,0 +1,66 @@
+﻿@using Bloggi.ViewModels;
+@model AdminBoardViewModel
+<section class="recent-posts">
+    <div class="section-title">
+        <h2><span>stories</span></h2>
+    </div>
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Brief</th>
+            <th>Created date</th>
+            <th>Updated date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var post in Model.posts)
+        {
+            <tr>
+                <td>@post.Title</td>
+                <td>@post.Brief</td>
+                <td>@post.CreatedOn.ToString("yyyy/MM/dd")</td>
+                <td>@post.UpdatedOn.ToString("yyyy/MM/dd")</td>
+                <td>
+                    <a href="@Url.Action("ViewPost", "Posts", new { id = post.Id })" class="btn btn-primary">View</a><br/>
+                    <a href="@Url.Action("EditPost", "Posts", new { id = post.Id })" class="btn btn-warning">Edit</a><br />
+                    <a href="@Url.Action("DeletePost", "Posts", new { id = post.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</section>
+<section class="recent-posts">
+    <div class="section-title">
+        <h2><span>Tags</span></h2>
+    </div>
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var tag in Model.tags)
+        {
+            <tr>
+                <td>@tag.Name</td>
+                <td>@Html.Raw(@tag.Description)</td>
+                <td>
+                    <a href="@Url.Action("ViewTag", "Tagss", new { id = tag.Id })" class="btn btn-primary">View</a>
+                    <a href="@Url.Action("EditTag", "Tags", new { id = tag.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("DeleteTag", "Tags", new { id = tag.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</section>

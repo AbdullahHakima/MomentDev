@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = $"Edit {Model.FirstName} {Model.LastName} details ";
+}
+@using Bloggi.ViewModels;
+@model EditUserViewModel
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <form asp-action="EditUser" asp-controller="Users" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input type="text" asp-for="FirstName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="Brief"></label>
+            <textarea asp-for="Brief" class="form-control" id="content" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="SocialLinks" class="form-label"></label>
+            <div class="input-group">
+                @for (var i = 0; i < Model.SocialLinks.Count; i++)
+                {
+                    <div class="input-group mb-3">
+                        <input asp-for="SocialLinks[i].Name" type="text" class="form-control" placeholder="Enter social link name">
+                        <input asp-for="SocialLinks[i].Url" type="text" class="form-control" placeholder="Enter social link URL">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary removeLink" type="button">Remove</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="input-group" id="newSocialLinkContainer">
+                <input type="text" class="form-control" id="newSocialLinkName" placeholder="Enter social link name">
+                <input type="text" class="form-control" id="newSocialLinkUrl" placeholder="Enter social link URL">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="addValueButton">Add link</button>
+                </div>
+            </div>
+            <small id="inputHelp" class="form-text text-muted">Press "Add link" to input new profile link.</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProfileImage"></label>
+            <input asp-for="ProfileImage" type="file" class="form-control-file" name="ProfileImage">
+        </div>
+        <input type="submit" value="Create Post" class="btn btn-primary">
+    </form>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // Add a new social link input field when the "Add link" button is clicked
+            $("#addValueButton").click(function () {
+                var newSocialLinkName = $("#newSocialLinkName").val();
+                var newSocialLinkUrl = $("#newSocialLinkUrl").val();
+                if (newSocialLinkName && newSocialLinkUrl) {
+                    var inputGroup = `
+                            <div class="input-group mb-3">
+                                <input asp-for="NewSocialLinks[${@Model.SocialLinks.Count}].Name" type="text" class="form-control" value="${newSocialLinkName}">
+                                <input asp-for="NewSocialLinks[${@Model.SocialLinks.Count}].Url" type="text" class="form-control" value="${newSocialLinkUrl}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary removeLink" type="button">Remove</button>
+                                </div>
+                            </div>`;
+                    $("#newSocialLinkContainer").before(inputGroup);
+                    $("#newSocialLinkName").val(""); // Clear the name input field
+                    $("#newSocialLinkUrl").val("");  // Clear the URL input field
+                }
+            });
+
+            // Remove a social link input field when the "Remove" button is clicked
+            $(document).on("click", ".removeLink", function () {
+                $(this).closest(".input-group").remove();
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/4p0i1zi0tdlanot1fb2rxzl8q1yvr1w4ia4u8wbvygxjpjru/tinymce/5/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#content', // Replace with the ID of your textarea
+            plugins: 'autolink lists link image',
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+            menubar: false,
+            statusbar: false,
+            apiKey: '4p0i1zi0tdlanot1fb2rxzl8q1yvr1w4ia4u8wbvygxjpjru' // Replace with your TinyMCE API key
+        });
+    </script>
+}
