@@ -10,26 +10,32 @@
         <div class="form-group">
             <label asp-for="Title"></label>
             <input type="text" asp-for="Title" class="form-control">
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Brief">Brief</label>
             <input asp-for="Brief" type="text" class="form-control">
+            <span asp-validation-for="Brief" class="text-danger"></span>
         </div>
         <div class="form-group">
         <label asp-for="Content"></label>
         <textarea  asp-for="Content" class="form-control" id="content" rows="4" ></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SelectedTagIds"></label>
             <select multiple asp-for="SelectedTagIds" asp-items="TagList" class="form-control"></select>
+            <span asp-validation-for="SelectedTagIds" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="ReadingTime">Reading Time (minutes)</label>
             <input asp-for="ReadingTime" type="number" class="form-control">
+            <span asp-validation-for="ReadingTime" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Image"></label>
             <input asp-for="Image" type="file" class="form-control-file" name="Image">
+            <span asp-validation-for="Image" class="text-danger"></span>
         </div>
         <input type="submit" value="Create Post" class="btn btn-primary">
     </form>
@@ -48,5 +54,7 @@
             apiKey: '4p0i1zi0tdlanot1fb2rxzl8q1yvr1w4ia4u8wbvygxjpjru' // Replace with your TinyMCE API key
         });
     </script>
-
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

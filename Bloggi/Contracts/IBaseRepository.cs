@@ -1,5 +1,6 @@
 ﻿using Bloggi.Consts;
 using Bloggi.Helpers;
+using Bloggi.ViewModels;
 using System.Linq.Expressions;
 
 namespace Bloggi.Contracts;
@@ -19,4 +20,5 @@ public interface BaseRepository<T> where T : class
     //PageNumber => for the Current Page
     //PageCount => for the number of pages available based on the number of the item list
     IEnumerable<T> ApplyPagination(IEnumerable<T> List,int PageNumber,int pageCount, int pageSize);
+
 }

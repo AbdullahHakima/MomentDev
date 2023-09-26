@@ -7,21 +7,25 @@
     <h1>Create a User</h1>
     <form asp-action="CreateUser" asp-controller="Users" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label asp-for="FirstName"></label>
+            <label asp-for="FirstName">First name</label>
             <input type="text" asp-for="FirstName" class="form-control">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="LastName"></label>
+            <label asp-for="LastName">Last name</label>
             <input asp-for="LastName" type="text" class="form-control">
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Brief"></label>
             <textarea asp-for="Brief" class="form-control" id="content" rows="4"></textarea>
+            <span asp-validation-for="Brief" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SocialLinks" class="form-label"></label>
             <div class="input-group">
                 <input asp-for="SocialLinks" value="" type="text" class="form-control" id="exampleInput" name="SocialLinks" placeholder="Enter your profile link">
+                <span asp-validation-for="SocialLinks" class="text-danger"></span>       
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="addValueButton">Add link</button>
                 </div>
@@ -31,8 +35,9 @@
         <div class="form-group">
             <label asp-for="ProfileImage"></label>
             <input asp-for="ProfileImage" type="file" class="form-control-file" name="ProfileImage">
+            <span asp-validation-for="ProfileImage" class="text-danger"></span>
         </div>
-        <input type="submit" value="Create Post" class="btn btn-primary">
+        <input type="submit" value="Register" class="btn btn-primary">
     </form>
 </div>
 @section Scripts{
@@ -65,4 +70,7 @@
             inputElement.parentNode.insertBefore(newInput, inputElement.nextSibling);
         });
     </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

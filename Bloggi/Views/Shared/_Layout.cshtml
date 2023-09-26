@@ -56,15 +56,22 @@
 						}else
 						{
 							<li class="nav-item">
-								<a class="nav-link" asp-action="SignIn" asp-controller="Users" >SignIn</a>
+								<a class="nav-link" asp-action="SignIn" asp-controller="Users" >Sign in</a>
 							</li>
 						}
 					</ul>
 					<!-- End Menu -->
 					<!-- Begin Search -->
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2" type="text" placeholder="Search">
-						<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
+					<form method="post" asp-action="Search" asp-controller="Posts" class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="text" placeholder="Search" name="content">
+						<span class="search-icon" id="search-button">
+							<svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25">
+								<!-- Your SVG icon here -->
+								<path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path>
+							</svg>
+						</span>
+						<!-- Hide the actual submit button -->
+						<button type="submit" id="submit-button" style="display: none;"></button>
 					</form>
 					<!-- End Search -->
 				</div>
@@ -88,9 +95,9 @@
 		<div class="container sociallinks">
 			<div class="row justify-content-center">
 				<div class="sociallinks">
-					<a href="#"><i class="fa-brands fa-square-facebook fa-2xl" ></i></a>
-					<a href="#"><i class="fa-brands fa-linkedin fa-2xl" ></i></a>
-					<a href="#"><i class="fa-brands fa-square-x-twitter fa-2xl" ></i></a>
+					<a href="https://web.facebook.com/profile.php?id=100016591723059"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
+					<a href="https://www.linkedin.com/in/abdullahhakimam"><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+					<a href="https://twitter.com/Abdullahhakimam"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
 				</div>
 			</div>
 		</div><br />
@@ -108,6 +115,13 @@
 	<script src="~/js/bootstrap.min.js"></script>
 	<script src="~/js/ie10-viewport-bug-workaround.js"></script>
 	<script src="https://kit.fontawesome.com/430c8ecba2.js" crossorigin="anonymous"></script>
+	<script>
+		// Add a click event listener to the search icon
+		document.getElementById("search-button").addEventListener("click", function () {
+			// Trigger the form submission when the icon is clicked
+			document.getElementById("submit-button").click();
+		});
+	</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

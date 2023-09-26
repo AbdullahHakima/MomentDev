@@ -187,5 +187,18 @@ namespace Bloggi.Controllers
             }
             return BadRequest();
         }
+        public async Task<IActionResult> Search(string content)
+        {
+            var result=new List<SearchResultViewModel>();
+            if (!string.IsNullOrEmpty(content))
+            {
+                var searchContent = new SearchViewModel { Content = content };
+                result = await _unitOfWork.Posts.search(searchContent);
+                if (result != null)
+                    return View(result);
+            }
+                
+            return View(result);
+        }
     }
 }

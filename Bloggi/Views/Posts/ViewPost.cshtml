@@ -44,7 +44,7 @@
 						<div class="custom-mata">
 						<a class="link-dark" asp-action="ViewAuthor" asp-controller="Users" asp-route-id=@Model.User.Id>@Model.User.FirstName @Model.User.LastName</a>
 						<span class="dot"></span>
-						<a href="#" class="btn follow">Follow</a>
+						<a asp-action="ViewAuthor" asp-controller="Users" asp-route-id=1 class="btn follow">Follow</a>
 						</div>
 
 						<span class="post-read">@Model.ReadingTime min read</span>
@@ -103,7 +103,7 @@
 						<div class="col-md-4">
 							<div class="card">
 								<a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@userPosts.Id>
-									<img class="img-fluid img-thumb" style="width:" src="@userPosts.ImageUrl" alt="@userPosts.Title">
+									<img class="img-fluid img-thumb" src="@userPosts.ImageUrl" alt="@userPosts.Title">
 								</a>
 								<div class="card-block">
 									<h2 class="card-title"><a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@userPosts.Id>@userPosts.Title</a></h2>
@@ -140,12 +140,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- End Related Posts
-	================================================== -->
+	<!-- End Related Posts================================================== -->
 	
 }
-<!-- Begin AlertBar
-================================================== -->
+<!-- Begin AlertBar================================================== -->
 <div class="alertbar">
 	<div class="container text-center">
 		<img src="~/Images/logo.png" alt=""> &nbsp; Never miss a <b>story</b> from us, get weekly updates in your inbox. <a href="#" class="btn subscribe">Get Updates</a>

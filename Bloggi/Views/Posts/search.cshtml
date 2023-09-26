@@ -1,0 +1,106 @@
+﻿@using Bloggi.ViewModels;
+@model List<SearchResultViewModel>
+@{
+    ViewData["Title"] = $"Search for";
+}
+@if(@Model.Count()==0)
+{
+    
+    <div class="container" style="display:flex;justify-content:center">
+        <h2><span>Nothing was Found</span></h2>
+    </div>
+}else
+{
+
+<section class="recent-posts">
+    <div class="section-title">
+        <h2><span>Search results</span></h2>
+    </div>
+    <div class="card-columns listrecent">
+        @foreach (var post in @Model)
+        {
+            <!-- begin post -->
+            <div class="card">
+                <a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.PostId">
+                    <img class="img-fluid" src="@post.ImageUrl" alt="@post.PostTitle">
+                </a>
+                <div class="card-block">
+                    <h2 class="card-title"><a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.PostId">@post.PostTitle</a></h2>
+                    <h4 class="card-text">@post.Brief</h4>
+                    <div class="metafooter">
+                        <div class="wrapfooter">
+                            <span class="author-meta">
+                                <span class="post-read"> @post.ReadingTime min read</span>
+                                <span class="dot"></span>
+                                <span class="post-date">@post.CreatedOn.ToString("yyyy/MM/dd")</span>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="tagcontainer">
+                        <div class="icon-container">
+                            <a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@post.PostId>
+                                <i class="fa-solid fa-angles-right fa-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+</section>
+}
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const scrollContainer = $('.horizontal-scroll');
+            const scrollList = $('.tags');
+            const scrollButtonLeft = $('.scroll-button.left');
+            const scrollButtonRight = $('.scroll-button.right');
+
+            let scrollPosition = 0;
+
+            // Check if the tags overflow to the right
+            if (scrollList.width() > scrollContainer.width()) {
+                scrollButtonRight.css('visibility', 'visible'); // Show right button
+            } else {
+                scrollButtonRight.css('visibility', 'hidden'); // Hide right button
+            }
+
+            // Scroll to the right
+            scrollButtonRight.click(function () {
+                scrollPosition += 100; // Adjust this value for scrolling distance
+                if (scrollPosition > scrollList.width() - scrollContainer.width()) {
+                    scrollPosition = scrollList.width() - scrollContainer.width();
+                }
+                scrollButtonLeft.css('visibility', 'visible'); // Show left button
+
+                if (scrollPosition >= scrollList.width() - scrollContainer.width()) {
+                    scrollButtonRight.css('visibility', 'hidden'); // Hide right button when at the end
+                }
+
+                scrollList.css('transform', `translateX(-${scrollPosition}px)`);
+            });
+
+            // Scroll to the left
+            scrollButtonLeft.click(function () {
+                scrollPosition -= 100; // Adjust this value for scrolling distance
+                if (scrollPosition < 0) {
+                    scrollPosition = 0;
+                }
+                scrollButtonRight.css('visibility', 'visible'); // Show right button
+
+                if (scrollPosition === 0) {
+                    scrollButtonLeft.css('visibility', 'hidden'); // Hide left button when at the beginning
+                }
+
+                scrollList.css('transform', `translateX(-${scrollPosition}px)`);
+            });
+        });
+    </script>
+
+}
