@@ -33,4 +33,5 @@ public class ApplicationDbContext : IdentityDbContext<User,UserRole,int>
     public DbSet<Tag> Tags { get; set; }
     public DbSet<User> users { get; set; }
     public DbSet<UserRole> roles { get; set; }
+    public DbSet<Subscriber> subscribers { get; set; }
 }

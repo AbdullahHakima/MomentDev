@@ -14,14 +14,18 @@ namespace Bloggi.Repositories
 
         public Contracts.BaseRepository<SocialLinks> SocialLinks { get; private set; }
 
-        public UnitOfWork(ApplicationDbContext context)
+		public Contracts.BaseRepository<Subscriber> Subscribers  {get; private set; }
+
+
+		public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             Posts = new PostRepository(_context);
             Tags = new BaseRepository<Tag>(_context);
             Users = new UserRepository(_context);
             SocialLinks = new BaseRepository<SocialLinks>(_context);
-
+            Subscribers=new BaseRepository<Subscriber>(_context); 
+            
         }
         public void Complete()
         {

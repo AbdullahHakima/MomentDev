@@ -12,9 +12,11 @@ namespace Bloggi.Controllers
     public class PostsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailService _emailService;
 
-        public PostsController(IUnitOfWork unitOfWork)
+        public PostsController(IUnitOfWork unitOfWork,IEmailService emailService)
         {
+            _emailService = emailService;
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
@@ -200,5 +202,24 @@ namespace Bloggi.Controllers
                 
             return View(result);
         }
+        [HttpPost]
+        public async Task<IActionResult> Subscribe(string subscriberEmail)
+        {
+            if(ModelState.IsValid)
+            {
+                var newSubscribe = new Subscriber()
+                {
+                    Email = subscriberEmail
+                };
+
+                await _unitOfWork.Subscribers.CreateAsync(newSubscribe);
+                _unitOfWork.Complete();
+                string emailmessage = _emailService.GetEmailContent("SubscriberThankYou");
+                await _emailService.SendEmail(newSubscribe.Email, "Thank You for Subscribing!", emailmessage);
+
+            }
+            return PartialView("_ThankYouSubscriberPartialView");
+        }
+      
     }
 }

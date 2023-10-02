@@ -1,0 +1,15 @@
+﻿<div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close" id="close-popup">&times;</span>
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with our latest news and blog posts.</p>
+        <form id="subscribe-form" method="post" asp-action="Subscribe" asp-controller="Posts">
+            <input type="email" placeholder="Enter your email" name="subscriberEmail" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+
+

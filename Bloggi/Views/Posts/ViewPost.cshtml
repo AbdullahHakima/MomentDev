@@ -146,8 +146,75 @@
 <!-- Begin AlertBar================================================== -->
 <div class="alertbar">
 	<div class="container text-center">
-		<img src="~/Images/logo.png" alt=""> &nbsp; Never miss a <b>story</b> from us, get weekly updates in your inbox. <a href="#" class="btn subscribe">Get Updates</a>
+		@{
+			await Html.RenderPartialAsync("_PopupSubscriptionFormPartial");
+		}
+		<img src="~/Images/logo.png" alt=""> &nbsp; Never miss a <b>story</b> from us, get weekly updates in your inbox.<button type="submit" id="show-popup" class="btn subscribe">Get Updates</button>
 	</div>
 </div>
+@section Scripts{
+    <script>
+
+    // Get references to DOM elements
+    const showPopupButton = document.getElementById('show-popup');
+    const popup = document.getElementById('popup');
+    const closePopupButton = document.getElementById('close-popup');
+    const overlay = document.getElementById('overlay');
+
+    // Function to open the popup
+    function openPopup() {
+        popup.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+
+    // Event listeners
+    showPopupButton.addEventListener('click', openPopup);
+    closePopupButton.addEventListener('click', closePopup);
+    overlay.addEventListener('click', closePopup);
+
+</script>
+<script>
+		$(document).ready(function () {
+			// Event delegation for the close button within the document
+			$(document).on('click', '#close-popup', function () {
+				closePopup();
+			});
+
+			$('#subscribe-form').on('submit', function (e) {
+				e.preventDefault(); // Prevent the form from submitting traditionally
+
+				// Get the email input value
+				var email = $('#subscribe-form input[type="email"]').val();
+
+				// Send an AJAX POST request to the controller action
+				$.ajax({
+					type: 'POST',
+					url: '/Posts/Subscribe', // Replace with your controller and action
+					data: { subscriberEmail: email },
+					success: function (response) {
+						// Replace the form content with the thank you message
+						$('.popup-content').html(response);
+
+						// Reattach the event listener to the close button
+						$(document).on('click', '#close-popup', function () {
+							closePopup();
+						});
+					},
+					error: function () {
+						alert('An error occurred while subscribing.');
+					}
+				});
+			});
+		});
+
+
+</script>
+}
 <!-- End AlertBar
 ================================================== -->

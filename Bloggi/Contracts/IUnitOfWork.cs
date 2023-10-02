@@ -9,6 +9,7 @@ namespace Bloggi.Contracts
        BaseRepository<Tag> Tags { get; }
        UserRepository Users { get; }
        BaseRepository<SocialLinks> SocialLinks { get; }
+       BaseRepository<Subscriber> Subscribers { get; }
 
         void Complete();
 
