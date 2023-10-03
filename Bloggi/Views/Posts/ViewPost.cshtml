@@ -2,7 +2,14 @@
 	ViewData["Title"] = Model.Title;
 }
 @using Bloggi.ViewModels;
+@using Microsoft.AspNetCore.Http.Extensions;
 @model PostViewModel
+@section MetaTags{
+	<meta property="og:title" content="@Html.Raw(ViewData["Title"])" />
+	<meta property="og:description" content="@Html.Raw(Model.Brief)" />
+	<meta property="og:image" content="@Model.ImageUrl" />
+	<meta property="og:url" content="@Context.Request.GetDisplayUrl()" />
+}
 <!-- Begin Article
 ================================================== -->
 <div class="container">
@@ -103,7 +110,7 @@
 						<div class="col-md-4">
 							<div class="card">
 								<a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@userPosts.Id>
-									<img class="img-fluid img-thumb" src="@userPosts.ImageUrl" alt="@userPosts.Title">
+									<img class="img-fluid img-thumb" src="@userPosts.ImageUrlOutServer" alt="@userPosts.Title">
 								</a>
 								<div class="card-block">
 									<h2 class="card-title"><a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@userPosts.Id>@userPosts.Title</a></h2>

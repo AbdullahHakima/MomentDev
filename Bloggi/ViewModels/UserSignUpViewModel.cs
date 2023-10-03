@@ -13,6 +13,8 @@ namespace Bloggi.ViewModels
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public IFormFile Image { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string ImageUrlOutServer { get; set; }
         public string Brief { get; set; }
     }
 }

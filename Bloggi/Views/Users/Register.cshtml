@@ -45,6 +45,12 @@
             <div class="form-group">
                 <label asp-for="Image"></label>
                 <input asp-for="Image" type="file" class="form-control-file" name="Image">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrlOutServer">Image URL</label>
+                <input asp-for="ImageUrlOutServer" type="url" class="form-control-file" name="ImageUrlOutServer">
+                <span asp-validation-for="ImageUrlOutServer" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -34,7 +34,7 @@ namespace Bloggi.Controllers
 				await AccountDetails.Image.CopyToAsync(data);
 				var user = new User()
 				{
-					ProfileImageUrl = _unitOfWork.Users.GetImageUrl(data.ToArray()),
+					ProfileImageUrl = AccountDetails.ImageUrlOutServer,
 					Brief=AccountDetails.Brief,
 					FirstName=AccountDetails.FirstName,
 					LastName=AccountDetails.LastName,
@@ -118,7 +118,7 @@ namespace Bloggi.Controllers
                     CreatedOn = post.CreatedOn.Date,
                     Id = post.Id,
                     ReadingTime = post.ReadingTime,
-                    ImageUrl = post.ImageUrl,
+                    ImageUrl = post.ImageUrlOutServer,
                     Tags = (List<Tag>)post.Tags
                 };
                 userView.UserPostsVM.Add(Converted);
@@ -151,7 +151,7 @@ namespace Bloggi.Controllers
 					FirstName = createdUser.FirstName,
 					LastName = createdUser.LastName,
 					Brief = createdUser.Brief,
-					ProfileImageUrl = _unitOfWork.Users.GetImageUrl(data.ToArray()),
+					ProfileImageUrl = createdUser.ProfileImageUrl,
 					SocialLinks=new List<SocialLinks>(),
                 };
 				if(createdUser.SocialLinks!=null)
@@ -223,7 +223,7 @@ namespace Bloggi.Controllers
 				if (oldUser != null)
 				{
 					oldUser.Brief = model.Brief;
-					oldUser.ProfileImageUrl = _unitOfWork.Users.GetImageUrl(data.ToArray());
+					oldUser.ProfileImageUrl = model.ProfileImageUrl;
 					oldUser.FirstName = model.FirstName;
 					oldUser.LastName = model.LastName;
 					oldUser.ProfileImage = data.ToArray();

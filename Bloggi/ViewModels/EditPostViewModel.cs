@@ -1,4 +1,5 @@
 ﻿using Bloggi.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bloggi.ViewModels
 {
@@ -13,8 +14,10 @@ namespace Bloggi.ViewModels
         [ImageSize()]
         public IFormFile Image { get; set; }
         public int ReadingTime { get; set; }
-        //public virtual List<Tag> Tags { get; set; }
-        public List<int> SelectedTagIds { get; set; }
+		[DataType(DataType.ImageUrl)]
+		public string UploadedImageUrl { get; set; }
+		//public virtual List<Tag> Tags { get; set; }
+		public List<int> SelectedTagIds { get; set; }
         
     }
 }

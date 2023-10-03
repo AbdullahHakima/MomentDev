@@ -12,6 +12,7 @@ public class User:IdentityUser<int>
 
     public byte[] ProfileImage { get; set; }
     public string Brief { get; set; }
+    [DataType(DataType.ImageUrl)]
     public string ProfileImageUrl { get; set; }
     
     public virtual List<SocialLinks> SocialLinks { get; set; } = new List<SocialLinks>();

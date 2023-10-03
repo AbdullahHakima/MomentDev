@@ -18,31 +18,31 @@
         <h2><span>All Stories</span></h2>
     </div>
     <div class="card-columns listrecent">
-        @foreach(var post in @Model)
+        @foreach (var post in @Model)
         {
-        <!-- begin post -->
-        <div class="card">
-            <a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.Id">
-                <img class="img-fluid"  src="@post.ImageUrl" alt="@post.Title">
-            </a>
+            <!-- begin post -->
+            <div class="card mb-4">
+                <a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.Id" title="PostURL">
+                    <img class="img-fluid" src="@post.ImageUrl" alt="@post.Title" >
+                </a>
                 <div class="card-block">
-                    <h2 class="card-title"><a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.Id">@post.Title</a></h2>
+                    <h2 class="card-title">
+                        <a asp-action="ViewPost" asp-controller="Posts" asp-route-id="@post.Id" title="PostURL">@post.Title</a>
+                    </h2>
                     <h4 class="card-text">@post.Brief</h4>
                     <div class="metafooter">
                         <div class="wrapfooter">
                             <span class="author-meta">
-                                <span class="post-read"> @post.ReadingTime min read</span>
+                                <span class="post-read">@post.ReadingTime min read</span>
                                 <span class="dot"></span>
                                 <span class="post-date">@post.CreatedOn.ToString("yyyy/MM/dd")</span>
                             </span>
                         </div>
-                        
                     </div>
 
                     <div class="tagcontainer">
-                        
                         <div class="tags-container">
-                            <div >
+                            <div>
                                 <ul class="tags">
                                     @foreach (var tag in post.Tags)
                                     {
@@ -51,18 +51,18 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="icon-container" >
+                        <div class="icon-container">
                             <a asp-action="ViewPost" asp-controller="Posts" asp-route-id=@post.Id>
                                 <i class="fa-solid fa-angles-right fa-lg"></i>
                             </a>
                         </div>
                     </div>
-
-                    
                 </div>
-        </div>
+            </div>
         }
     </div>
+
+
 </section>
 
 

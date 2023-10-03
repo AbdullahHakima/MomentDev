@@ -37,6 +37,11 @@
             <input asp-for="ProfileImage" type="file" class="form-control-file" name="ProfileImage">
             <span asp-validation-for="ProfileImage" class="text-danger"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="ProfileImageUrl"></label>
+            <input asp-for="ProfileImageUrl" type="url" class="form-control-file" name="ProfileImageUrl">
+            <span asp-validation-for="ProfileImageUrl" class="text-danger"></span>
+        </div>
         <input type="submit" value="Register" class="btn btn-primary">
     </form>
 </div>

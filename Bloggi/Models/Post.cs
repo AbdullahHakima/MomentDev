@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bloggi.Models
 {
@@ -12,12 +13,9 @@ namespace Bloggi.Models
         public required string Content { get; set; }
         public required byte[] Image { get; set; } 
         public int ReadingTime { get; set; }
-        public string ImageUrl { get; set; }
-		public Post(byte[] image)
-		{
-            ImageUrl = $"data:image/jpeg;base64,{Convert.ToBase64String(image)}";
-
-		}
+        //variable for Image post uploaded outside the server
+        [DataType(DataType.ImageUrl)]
+        public string ImageUrlOutServer { get; set; }
 		public virtual ICollection<Tag> Tags { get; set; }=new List<Tag>();
         public virtual List<PostTag> PostTags { get; set; }
 

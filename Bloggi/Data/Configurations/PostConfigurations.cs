@@ -17,7 +17,7 @@ namespace Bloggi.Data.Configurations
             builder.Property(p=>p.ReadingTime).IsRequired();
             builder.Property(p => p.CreatedOn).HasDefaultValueSql("GETDATE()");
             builder.Property(p=>p.Image).IsRequired();
-            builder.Property(p => p.ImageUrl).IsRequired();
+            builder.Property(p => p.ImageUrlOutServer).IsRequired();
         }
     }
 }

@@ -16,6 +16,6 @@ namespace Bloggi.ViewModels;
         public virtual User User { get; set; }
         public List<Post> Posts { get; set; }
         public int RelatedPostCount { get; set; }
-       
+
 }
 

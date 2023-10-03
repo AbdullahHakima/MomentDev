@@ -44,7 +44,7 @@ public class PostRepository : BaseRepository<Post>
             PostTitle = entity.Title,
             Brief = entity.Brief,
             CreatedOn = entity.CreatedOn,
-            ImageUrl = entity.ImageUrl,
+            ImageUrl = entity.ImageUrlOutServer,
             PostId = entity.Id,
             ReadingTime=entity.ReadingTime,
             //tags=entity.Tags.ToList(),

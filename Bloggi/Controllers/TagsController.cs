@@ -45,7 +45,7 @@ namespace Bloggi.Controllers
 							Title = tagPost.Title,
 							CreatedOn = tagPost.CreatedOn,
 							ReadingTime = tagPost.ReadingTime,
-							ImageUrl= tagPost.ImageUrl
+							ImageUrl= tagPost.ImageUrlOutServer
 						};
 						tagView.Posts.Add(mappedPost);
                     }

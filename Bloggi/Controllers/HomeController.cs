@@ -32,7 +32,7 @@ public class HomeController : Controller
                 CreatedOn = post.CreatedOn.Date,
                 Id = post.Id,
                 ReadingTime = post.ReadingTime,
-                ImageUrl = post.ImageUrl,
+                ImageUrl = post.ImageUrlOutServer,
                 Tags=(List<Tag>)post.Tags
             };
             ViewPost.Add(Converted);

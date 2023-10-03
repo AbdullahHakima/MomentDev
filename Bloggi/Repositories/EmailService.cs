@@ -18,7 +18,7 @@ namespace Bloggi.Repositories
 
 		public string GetEmailContent(string emailTempalte)
 		{
-			var templatePath = Path.Combine(_webHostEnvironment.ContentRootPath,"Views","Emails", $"{emailTempalte}.cshtml");
+			var templatePath = Path.Combine(_webHostEnvironment.ContentRootPath, emailTempalte, $"{emailTempalte}.cshtml");
 			if (!File.Exists(templatePath))
 				throw new FileNotFoundException($"{emailTempalte} not founded!");
 			return File.ReadAllText(templatePath);

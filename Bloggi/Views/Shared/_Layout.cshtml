@@ -3,18 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	@RenderSection("MetaTags",false)
 	<link rel="icon" href="~/Images/favicon.ico">
 	<title>@ViewData["Title"]</title>
 	<!-- Bootstrap core CSS -->
 	<link href="~/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Fonts -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 	<!-- Custom styles for this template -->
-    <link href="~/css/mediumish.css" type="text/css" rel="stylesheet">
-    <link href="~/css/custom.css" rel="stylesheet" />
+	<link href="~/css/mediumish.css" type="text/css" rel="stylesheet">
+    
+    
 </head>
 <body>
     <header>
@@ -71,7 +70,7 @@
 							</svg>
 						</span>
 						<!-- Hide the actual submit button -->
-						<button type="submit" id="submit-button" style="display: none;"></button>
+						<button type="submit" id="submit-button" style="display: none;">search button</button>
 					</form>
 					<!-- End Search -->
 				</div>
@@ -113,7 +112,6 @@
 	<script src="~/js/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="~/js/bootstrap.min.js"></script>
-	<script src="~/js/ie10-viewport-bug-workaround.js"></script>
 	<script src="https://kit.fontawesome.com/430c8ecba2.js" crossorigin="anonymous"></script>
 	<script>
 		// Add a click event listener to the search icon

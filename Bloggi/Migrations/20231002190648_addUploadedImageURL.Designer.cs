@@ -4,6 +4,7 @@ using Bloggi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bloggi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231002190648_addUploadedImageURL")]
+    partial class addUploadedImageURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,6 +51,10 @@ namespace Bloggi.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageUrlOutServer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -70,7 +77,7 @@ namespace Bloggi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Bloggi.Models.PostTag", b =>
@@ -85,7 +92,7 @@ namespace Bloggi.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("PostTag", (string)null);
+                    b.ToTable("PostTag");
                 });
 
             modelBuilder.Entity("Bloggi.Models.SocialLinks", b =>
@@ -111,7 +118,7 @@ namespace Bloggi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SocialLinks", (string)null);
+                    b.ToTable("SocialLinks");
                 });
 
             modelBuilder.Entity("Bloggi.Models.Subscriber", b =>
@@ -128,7 +135,7 @@ namespace Bloggi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("subscribers", (string)null);
+                    b.ToTable("subscribers");
                 });
 
             modelBuilder.Entity("Bloggi.Models.Tag", b =>
@@ -150,7 +157,7 @@ namespace Bloggi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Bloggi.Models.User", b =>

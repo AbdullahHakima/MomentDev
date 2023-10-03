@@ -7,7 +7,7 @@ public class UserViewModel
 {
 	public string FirstName { get; set; }
 	public string LastName { get; set; }
-
+	[DataType(DataType.ImageUrl)]
 	public string ProfileImageUrl { get; set; }
 	public string Brief { get; set; }
 
